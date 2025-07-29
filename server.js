@@ -5,8 +5,9 @@ require('dotenv').config();
 
 const app = express();
 const corsOptions ={
-    origin: ["http://localhost:3000","http://localhost:8080","https://my-webpage-7b83.onrender.com"
-    ],
+    methods: ["GET"],
+    origin: ["http://localhost:3000","http://localhost:8080","https://my-webpage-7b83.onrender.com"],
+    allowedHeaders: ["Content-Type", "Access-Control-Allow-Origin"],
 }
 
 app.use(cors(corsOptions));
