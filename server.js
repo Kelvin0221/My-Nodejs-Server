@@ -42,6 +42,7 @@ app.get("/api/aboutme/:getset", async (req, res) =>{
         }
         res.status(201).json(result);
     } catch (e){
+        console.log(e);
         res.status(500).send("Error");
     }
 })
@@ -52,6 +53,7 @@ app.get("/api/skills/:skillset", async (req, res) =>{
         
         res.status(201).json(result);
     } catch (e){
+        console.log(e);
         res.status(500).send("Error");
     }
 })
@@ -65,6 +67,8 @@ app.get("/api/skills/detail/:skill", async (req, res) =>{
                                 GROUP BY skillnameinitial, skillname, detail, example`;
         res.status(201).json(result);
     } catch (e){
+
+        console.log(e);
         res.status(500).send(e);
     }
 })
