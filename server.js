@@ -21,7 +21,6 @@ app.get("/api", (req,res) => {
 });
 
 app.get("/api/aboutme/:getset", async (req, res) =>{
-    console.log("Fetch aboutme");
     try{
         var result;
         switch (req.params.getset){
@@ -45,7 +44,6 @@ app.get("/api/aboutme/:getset", async (req, res) =>{
 })
 
 app.get("/api/skills/:skillset", async (req, res) =>{
-    console.log("Fetch seillset");
     try{
         const result = await sql`SELECT skillnameinitial, skillname, description FROM my_skill WHERE skillset=${req.params.skillset} ORDER BY display_order`;
         
@@ -69,6 +67,6 @@ app.get("/api/skills/detail/:skill", async (req, res) =>{
 })
 
 
-app.listen(8080, () =>{
+app.listen(433, () =>{
     console.log("server started");
 })
