@@ -4,9 +4,12 @@ const cors = require("cors");
 require('dotenv').config();
 
 const app = express();
+const port = process.env.PORT || 8080;
+const originURL = process.env.ORIGIN || "http://localhost:8080";
+
 const corsOptions ={
     methods: ["GET"],
-    origin: ["http://localhost:3000","http://localhost:8080","https://my-webpage-7b83.onrender.com"],
+    origin: ["http://localhost:3000","https://my-webpage-7b83.onrender.com", originURL],
     allowedHeaders: ["Content-Type", "Access-Control-Allow-Origin"],
 }
 
@@ -67,6 +70,6 @@ app.get("/api/skills/detail/:skill", async (req, res) =>{
 })
 
 
-app.listen(433, () =>{
+app.listen(port, () =>{
     console.log("server started");
 })
