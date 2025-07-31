@@ -9,7 +9,7 @@ const originURL = process.env.ORIGIN || "http://localhost:8080";
 
 const corsOptions ={
     methods: ["GET"],
-    origin: ["http://localhost:3000","https://my-webpage-7b83.onrender.com", originURL],
+    origin: ["http://localhost:3000", originURL],
     allowedHeaders: ["Content-Type", "Access-Control-Allow-Origin"],
 }
 
@@ -28,16 +28,19 @@ app.get("/api/aboutme/:getset", async (req, res) =>{
         var result;
         switch (req.params.getset){
             case "aboutme":
-                result = await sql`SELECT id, summary FROM my_summary WHERE id=2 LIMIT 1`;
+                result = await sql`SELECT id, title, summary FROM my_summary WHERE id=2 LIMIT 1`;
                 break;
             case "freetime":
-                result = await sql`SELECT id, summary FROM my_summary WHERE id=3 LIMIT 1`;
+                result = await sql`SELECT id, title, summary FROM my_summary WHERE id=3 LIMIT 1`;
                 break;
             case "status":
-                result = await sql`SELECT id, summary FROM my_summary WHERE id=4 LIMIT 1`;
+                result = await sql`SELECT id, title, summary FROM my_summary WHERE id=4 LIMIT 1`;
+                break;
+            case "reason":
+                result = await sql`SELECT id, title, summary FROM my_summary WHERE id=5 LIMIT 1`;
                 break;
             default:
-                result = await sql`SELECT id, summary FROM my_summary WHERE id=1 LIMIT 1`;
+                result = await sql`SELECT id, title, summary FROM my_summary WHERE id=1 LIMIT 1`;
 
         }
         res.status(201).json(result);
@@ -73,6 +76,15 @@ app.get("/api/skills/detail/:skill", async (req, res) =>{
     }
 })
 
+app.get("/api/disclaimer", async (req, res) => {
+    try{
+        const result = await sql`SELECT summary FROM my_summary WHERE title = 'Disclaimer' LIMIT 1`;
+        res.status(201).json(result);
+    } catch (e){
+        console.log(e);
+        res.status(500).send(e);
+    }
+})
 
 app.listen(port, () =>{
     console.log("server started");
